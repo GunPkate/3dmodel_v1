@@ -14,6 +14,20 @@ const camera = new THREE.PerspectiveCamera(
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
-renderer.render(scene, camera);
+//Box
+
+const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
+// boxGeometry
+const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xbbbbbb });
+const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+
+scene.add(boxMesh);
+camera.translateZ(+50);
+
+function animate() {
+  boxMesh.rotateX(0.08);
+  renderer.render(scene, camera);
+}
