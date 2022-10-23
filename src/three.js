@@ -30,10 +30,12 @@ const groundTexture = texture.load("src/texture/grasslight-big.jpg");
 groundTexture.repeat.set(1000, 1000);
 groundTexture.wrapS = THREE.RepeatWrapping;
 groundTexture.wrapT = THREE.RepeatWrapping;
+groundTexture.encoding = THREE.sRGBEncoding;
 
 const groundGeometry = new THREE.PlaneGeometry(15000, 15000);
 const groundMaterial = new THREE.MeshPhongMaterial({ map: groundTexture });
 const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+groundMesh.rotateX(-Math.PI / 2);
 
 scene.add(groundMesh);
 //Box
@@ -44,17 +46,18 @@ const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
 const boxMaterial = new THREE.MeshPhongMaterial({ map: boxTexture });
 // const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xbbbbbb }); //no light FX
 const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+boxMesh.translateY(15);
+
 scene.add(boxMesh);
 //Cone
 const coneTexture = texture.load("src/texture/Water_1_M_Normal.jpg");
 const coneGeometry = new THREE.ConeGeometry(5, 20, 20, 40);
 const coneMaterial = new THREE.MeshPhongMaterial({ map: coneTexture });
 const coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
-coneMesh.translateX(20);
+coneMesh.translateX(20).translateY(15);
 scene.add(coneMesh);
 
-camera.translateZ(+50);
-camera.translateY(+10);
+camera.translateZ(+50).translateY(+10);
 
 function animate() {
   boxMesh.rotateY(0.08);
